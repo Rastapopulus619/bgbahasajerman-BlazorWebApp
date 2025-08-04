@@ -2,16 +2,9 @@ using bgbahasajerman_BlazorWebApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure URLs for different environments
-if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
-{
-    // In Docker container - bind to all interfaces
-    builder.WebHost.UseUrls("http://0.0.0.0:80");
-}
-
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+                .AddInteractiveServerComponents();
 
 var app = builder.Build();
 
@@ -24,6 +17,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 
 app.UseAntiforgery();
 
