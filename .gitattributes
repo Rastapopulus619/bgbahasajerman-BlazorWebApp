@@ -61,3 +61,11 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+# Explicitly mark common binary font and web asset files as binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+*.ico   binary
+*.mp4   binary

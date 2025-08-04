@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  blazor-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bgbahasajerman-blazor-app
+    ports:
+      - "8082:80"  # Back to original mapping
+    networks:
+      - blazor-network
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    volumes:
+      - ./:/src
+      - ./data-protection-keys:/root/.aspnet/DataProtection-Keys
+    working_dir: /src
+
+networks:
+  blazor-network:
+    driver: bridge
