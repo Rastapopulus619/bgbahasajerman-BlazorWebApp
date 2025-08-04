@@ -19,8 +19,8 @@ services:
       - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=true
     volumes:
       - .:/src
-      - /src/bin  # Exclude bin directory
-      - /src/obj  # Exclude obj directory
+      #- /src/bin  # Exclude bin directory
+      #- /src/obj  # Exclude obj directory
 
 networks:
   blazor-network:
