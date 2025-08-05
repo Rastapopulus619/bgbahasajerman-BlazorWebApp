@@ -13,6 +13,30 @@ if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// Dynamically set API base URL
+string apiBaseUrl;
+if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
+{
+    Console.WriteLine("Running in Docker");
+    // Running in Docker: use internal Docker network address
+    apiBaseUrl = "http://dataaccessapi:8090/"; // Replace with your actual service name and port
+}
+else
+{
+    Console.WriteLine("Running locally from Visual Studio");
+    // Local development: use Tailscale IP of Ubuntu server
+    apiBaseUrl = "http://100.117.149.44:8090/"; // Tailscale IP and API port
+}
+
+// Log the API URL for debugging
+Console.WriteLine($"[BLAZOR] Using API Base URL: {apiBaseUrl}");
+
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri(apiBaseUrl),
+    Timeout = TimeSpan.FromSeconds(30)
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
