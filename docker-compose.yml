@@ -9,6 +9,7 @@ services:
       - "0.0.0.0:8083:80"  # Explicitly bind to all interfaces
     networks:
       - blazor-network
+      - shared-net   # <-- Add this line to join the shared network
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -25,3 +26,5 @@ services:
 networks:
   blazor-network:
     driver: bridge
+  shared-net:         # <-- Add this block to reference the external network
+    external: true

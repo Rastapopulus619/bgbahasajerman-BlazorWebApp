@@ -19,7 +19,7 @@ if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
 {
     Console.WriteLine("Running in Docker");
     // Running in Docker: use internal Docker network address
-    apiBaseUrl = "http://dataaccessapi:8090/"; // Replace with your actual service name and port
+    apiBaseUrl = "http://bgbj-dataaccess-api:80/"; // Replace with your actual service name and port
 }
 else
 {
